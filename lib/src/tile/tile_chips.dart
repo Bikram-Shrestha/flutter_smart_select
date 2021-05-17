@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../chip_theme.dart';
 
 /// Chips tile/trigger widget
@@ -164,7 +165,7 @@ class S2TileChips extends StatelessWidget {
 
   Widget _chipGenerator(BuildContext context, int i) {
     return Chip(
-      label: chipLabelBuilder?.call(context, i),
+      label: chipLabelBuilder.call(context, i),
       avatar: chipAvatarBuilder?.call(context, i),
       deleteIcon: chipDeleteIcon,
       onDeleted: chipOnDelete != null ? () => chipOnDelete!(i) : null,

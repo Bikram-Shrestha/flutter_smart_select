@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'chip_theme.dart';
 import 'model/builder.dart';
 import 'model/choice_config.dart';
-import 'model/choice_theme.dart';
 import 'model/choice_item.dart';
-import 'chip_theme.dart';
+import 'model/choice_theme.dart';
 
 /// Resolve the choice builder based on choice type
 class S2ChoiceResolver<T> {
@@ -11,7 +12,7 @@ class S2ChoiceResolver<T> {
   final bool isMultiChoice;
 
   /// The choice type
-  final S2ChoiceType? type;
+  final S2ChoiceType type;
 
   /// Function to build the title widget
   final Widget Function(S2Choice<T>) titleBuilder;
@@ -75,7 +76,8 @@ class S2ChoiceResolver<T> {
         title: titleBuilder(choice),
         subtitle: subtitleBuilder(choice),
         secondary: secondaryBuilder(choice),
-        activeColor: choice.activeStyle!.accentColor ?? choice.activeStyle!.color,
+        activeColor:
+            choice.activeStyle!.accentColor ?? choice.activeStyle!.color,
         activeTrackColor: choice.activeStyle!.color?.withAlpha(0x80),
         inactiveThumbColor: choice.style!.accentColor,
         inactiveTrackColor: choice.style!.color?.withAlpha(0x80),
@@ -103,7 +105,7 @@ class S2ChoiceResolver<T> {
         controlAffinity: ListTileControlAffinity
             .values[choice.effectiveStyle!.control?.index ?? 2],
         onChanged: choice.disabled != true
-            ? (selected) => choice.select!(selected)
+            ? (selected) => choice.select!(selected!)
             : null,
         value: choice.selected,
       );
@@ -125,14 +127,14 @@ class S2ChoiceResolver<T> {
       labelStyle: effectiveStyle.titleStyle,
       selected: choice.selected,
       child: Padding(
-        padding: effectiveStyle?.margin ?? const EdgeInsets.all(0),
+        padding: effectiveStyle.margin ?? const EdgeInsets.all(0),
         child: RawChip(
           key: ValueKey(choice.value),
-          padding: effectiveStyle?.padding ?? const EdgeInsets.all(4),
+          padding: effectiveStyle.padding ?? const EdgeInsets.all(4),
           label: titleBuilder(choice),
           avatar: secondaryBuilder(choice),
-          clipBehavior: effectiveStyle?.clipBehavior ?? Clip.none,
-          showCheckmark: effectiveStyle?.showCheckmark ?? isMultiChoice,
+          clipBehavior: effectiveStyle.clipBehavior ?? Clip.none,
+          showCheckmark: effectiveStyle.showCheckmark ?? isMultiChoice,
           isEnabled: choice.disabled != true,
           onSelected: (selected) => choice.select!(selected),
           selected: choice.selected,

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:smart_select/src/utils/accent.dart';
+
 import 'choice_theme.dart';
 
 /// Validation callback
@@ -36,7 +37,7 @@ class S2Choice<T> with Diagnosticable {
   final S2ChoiceStyle? activeStyle;
 
   /// Callback to select choice
-  final ValueSetter<bool?>? select;
+  final ValueSetter<bool>? select;
 
   /// Whether the choice is selected or not
   final bool selected;
@@ -54,8 +55,7 @@ class S2Choice<T> with Diagnosticable {
     this.activeStyle,
     this.select,
     this.selected = false,
-  })  : assert(disabled != null),
-        assert(hidden != null);
+  });
 
   /// Helper to create option list from any list
   static List<S2Choice<R>> listFrom<R, E>({
@@ -75,8 +75,8 @@ class S2Choice<T> with Diagnosticable {
           .map((index, item) => MapEntry(
               index,
               S2Choice<R>(
-                value: value?.call(index, item),
-                title: title?.call(index, item),
+                value: value.call(index, item),
+                title: title.call(index, item),
                 subtitle: subtitle?.call(index, item),
                 group: group?.call(index, item),
                 disabled: disabled?.call(index, item) ?? false,
@@ -142,7 +142,7 @@ class S2Choice<T> with Diagnosticable {
 
   /// Creates a copy of this [S2Choice] but with
   /// the given fields replaced with the new values.
-  S2Choice<T> merge(S2Choice<T> other) {
+  S2Choice<T> merge(S2Choice<T>? other) {
     // if null return current object
     if (other == null) return this;
 

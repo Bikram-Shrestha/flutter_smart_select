@@ -1,6 +1,8 @@
 import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import './modal_theme.dart';
 
 /// Target to open choices list
@@ -100,17 +102,7 @@ class S2ModalConfig with Diagnosticable {
     this.barrierColor,
     this.style = const S2ModalStyle(),
     this.headerStyle = const S2ModalHeaderStyle(),
-  })  : assert(useHeader != null),
-        assert(useConfirm != null),
-        assert(useFilter != null),
-        assert(filterAuto != null),
-        assert(enableDrag != null),
-        assert(barrierDismissible != null),
-        assert(confirmBrightness != null),
-        assert(maxHeightFactor != null),
-        assert(maxHeightFactor > 0 && maxHeightFactor <= 1),
-        assert(style != null),
-        assert(headerStyle != null);
+  }) : assert(maxHeightFactor > 0 && maxHeightFactor <= 1);
 
   /// Returns true if the modal type is full page
   bool get isFullPage => type == S2ModalType.fullPage;
@@ -168,8 +160,8 @@ class S2ModalConfig with Diagnosticable {
       enableDrag: enableDrag ?? this.enableDrag,
       barrierDismissible: barrierDismissible ?? this.barrierDismissible,
       barrierColor: barrierColor ?? this.barrierColor,
-      style: this.style?.merge(style) ?? style!,
-      headerStyle: this.headerStyle?.merge(headerStyle) ?? headerStyle!,
+      style: this.style.merge(style),
+      headerStyle: this.headerStyle.merge(headerStyle),
     );
   }
 

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_select/smart_select.dart';
+
 import 'choices.dart' as choices;
 
 void main() {
   testSmartSelect(
-    title: 'Full page modal, default tile and radio choices displayed correctly',
+    title:
+        'Full page modal, default tile and radio choices displayed correctly',
     initialChoice: [],
     choiceToSelect: [
       choices.days[3],
@@ -17,7 +19,8 @@ void main() {
   );
 
   testSmartSelect(
-    title: 'Bottomsheet modal, default tile and chips choices displayed correctly',
+    title:
+        'Bottomsheet modal, default tile and chips choices displayed correctly',
     placeholder: 'Pilih Salah Satu',
     initialChoice: [],
     choiceToSelect: [
@@ -47,11 +50,11 @@ testSmartSelect<T>({
         child: SmartSelect<T>.multiple(
           title: title,
           placeholder: placeholder,
-          selectedValue: selectedChoice?.map((e) => e.value)?.toList(),
+          selectedValue: selectedChoice?.map((e) => e.value).toList(),
           choiceItems: choiceItems,
           modalType: modalType,
           choiceType: choiceType,
-          onChange: (selected) => selectedChoice = selected.choice,
+          onChange: (selected) => selectedChoice = selected?.choice,
         ),
       ),
     );
@@ -74,7 +77,7 @@ testSmartSelect<T>({
     );
     expect(
       s2State.selected!.value,
-      initialChoice?.map((e) => e.value)?.toList(),
+      initialChoice.map((e) => e.value).toList(),
       reason: 'Initial value is correct',
     );
 
@@ -184,12 +187,12 @@ testSmartSelect<T>({
 
     expect(
       s2State.selected!.value,
-      choiceToSelect?.map((e) => e.value)?.toList(),
+      choiceToSelect.map((e) => e.value).toList(),
       reason: 'New selected value to internal value is correct',
     );
     expect(
-      selectedChoice?.map((e) => e.value)?.toList(),
-      choiceToSelect?.map((e) => e.value)?.toList(),
+      selectedChoice!.map((e) => e.value).toList(),
+      choiceToSelect.map((e) => e.value).toList(),
       reason: 'New selected value to external value is correct',
     );
   });

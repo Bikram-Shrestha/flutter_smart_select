@@ -7,9 +7,10 @@ void main() {
     // the state model
     late S2SingleSelection<String> model;
     // the listener call counter
-    int? counter;
+    late int counter;
     // choice to select
-    S2Choice<String> choiceToSelect = S2Choice<String>(value: 'new-value', title: 'New Value');
+    S2Choice<String> choiceToSelect =
+        S2Choice<String>(value: 'new-value', title: 'New Value');
 
     setUp(() {
       counter = 0;
@@ -56,7 +57,7 @@ void main() {
     // the state model
     late S2MultiSelection<int> model;
     // the listener call counter
-    int? counter;
+    late int counter;
     // choice to select
     List<S2Choice<int>> choiceToSelect = S2Choice.listFrom<int, int>(
       source: <int>[2, 4, 7],

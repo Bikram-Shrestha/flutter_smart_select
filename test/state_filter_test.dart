@@ -6,7 +6,7 @@ void main() {
     // the state model
     late S2Filter model;
     // the listener call counter
-    int? counter;
+    late int counter;
 
     setUp(() {
       counter = 0;

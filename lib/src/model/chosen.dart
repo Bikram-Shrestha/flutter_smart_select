@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'choice_item.dart';
 
 /// Function to return a single [S2Choice] from a single `value`
@@ -119,10 +120,10 @@ mixin S2MultiChosenData<T> on S2ChosenData<T> {
 
   /// Returns an array of `title` of the [choice]
   @override
-  List<String>? get title {
+  List<String> get title {
     return isNotEmpty
-        ? choice.map((S2Choice<T> item) => item.title).toList().cast<String>()
-        : null;
+        ? choice.map((S2Choice<T> item) => item.title).toList()
+        : [];
   }
 
   /// Returns an array of `subtitle` of the [choice]
@@ -146,7 +147,7 @@ mixin S2MultiChosenData<T> on S2ChosenData<T> {
 
   @override
   String toString() {
-    return title?.join(', ');
+    return title.join(', ');
   }
 
   @override
@@ -208,7 +209,7 @@ abstract class S2ChosenNotifier<T> extends ChangeNotifier with S2ChosenData<T> {
   String error = '';
 
   /// Returns true when the selection is valid
-  bool get isValid => error == null || error?.length == 0;
+  bool get isValid => error.length == 0;
 
   /// Returns true when the selection is not valid
   bool get isNotValid => isValid != true;
@@ -451,7 +452,7 @@ class S2MultiSelected<T> extends S2Selected<T> with S2MultiChosenData<T> {
     return isResolving == true
         ? 'Resolving'
         : isValid == true
-            ? title?.join(', ') ?? placeholder ?? 'Select one or more'
+            ? title.join(', ')
             : error;
   }
 }
@@ -563,7 +564,7 @@ class S2MultiSelection<T> extends S2Selection<T> with S2MultiChosenData<T> {
 
   @override
   String toString() {
-    return isValid == true ? (title?.join(', ') ?? '') : error;
+    return isValid == true ? (title.join(', ')) : error;
   }
 
   @override
@@ -578,7 +579,7 @@ class S2MultiSelection<T> extends S2Selection<T> with S2MultiChosenData<T> {
 
   @override
   void reset() {
-    choice = List.from(initial ?? []);
+    choice = List.from(initial);
   }
 
   @override

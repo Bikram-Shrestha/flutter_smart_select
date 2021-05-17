@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widget.dart';
 
 /// Default trigger/tile widget
@@ -170,10 +171,10 @@ class S2Tile<T> extends StatelessWidget {
   Widget get _tileWithBodyWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      (children: <Widget?>[
+      children: <Widget>[
         _tileWidget,
-        body,
-      ]) as List<Widget>,
+        body!,
+      ],
     );
   }
 

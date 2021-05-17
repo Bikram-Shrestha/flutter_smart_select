@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
+
 import '../model/choice_item.dart';
 import '../model/choice_loader.dart';
-import '../model/group_data.dart';
 import '../model/group_config.dart';
+import '../model/group_data.dart';
 
 /// Type of what the choice state can do
 enum S2ChoicesTask {
@@ -52,7 +53,7 @@ class S2Choices<T> extends ChangeNotifier {
 
   /// Returns values of the choice items
   List<T>? get values {
-    return items?.map((S2Choice<T> choice) => choice.value)?.toList();
+    return items?.map((S2Choice<T> choice) => choice.value).toList();
   }
 
   /// Returns length of the choice items
@@ -105,8 +106,6 @@ class S2Choices<T> extends ChangeNotifier {
 
   /// Function to load choice items
   void load(S2ChoicesTask _task, {String? query}) async {
-    assert(_task != null);
-
     // skip the loader if the status busy
     if (isBusy) return null;
 
@@ -133,7 +132,7 @@ class S2Choices<T> extends ChangeNotifier {
       }
     } catch (e) {
       if (isAppending) page--;
-      error = e;
+      error = e as Error;
     } finally {
       await Future.delayed(delay ?? const Duration(milliseconds: 300), () {
         task = null;
@@ -166,7 +165,7 @@ class S2Choices<T> extends ChangeNotifier {
 
   /// Returns a list of group
   List<S2Group<T>>? groupItems(S2GroupConfig config) {
-    if (groupKeys?.isEmpty == true) return null;
+    if (groupKeys.isEmpty == true) return null;
 
     final List<S2Group<T>> groups = groupKeys
         .map((String groupKey) => S2Group<T>(
