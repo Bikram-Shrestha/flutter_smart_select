@@ -5,9 +5,9 @@ import 'package:smart_select/src/state/selection.dart';
 void main() {
   group('Single Choice', () {
     // the state model
-    S2SingleSelection<String> model;
+    late S2SingleSelection<String> model;
     // the listener call counter
-    int counter;
+    int? counter;
     // choice to select
     S2Choice<String> choiceToSelect = S2Choice<String>(value: 'new-value', title: 'New Value');
 
@@ -54,9 +54,9 @@ void main() {
 
   group('Multiple Choice', () {
     // the state model
-    S2MultiSelection<int> model;
+    late S2MultiSelection<int> model;
     // the listener call counter
-    int counter;
+    int? counter;
     // choice to select
     List<S2Choice<int>> choiceToSelect = S2Choice.listFrom<int, int>(
       source: <int>[2, 4, 7],

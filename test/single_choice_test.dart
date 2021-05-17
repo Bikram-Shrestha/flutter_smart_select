@@ -34,15 +34,15 @@ void main() {
 }
 
 testSmartSelect<T>({
-  @required String title,
-  @required S2Choice<T> initialChoice,
-  @required S2Choice<T> choiceToSelect,
-  @required List<S2Choice<T>> choiceItems,
+  required String title,
+  required S2Choice<T>? initialChoice,
+  required S2Choice<T> choiceToSelect,
+  required List<S2Choice<T>> choiceItems,
   S2ModalType modalType = S2ModalType.fullPage,
-  S2ChoiceType choiceType,
+  S2ChoiceType? choiceType,
   String placeholder = 'Select one',
 }) {
-  S2Choice<T> selectedChoice = initialChoice;
+  S2Choice<T?>? selectedChoice = initialChoice;
 
   testWidgets(title, (WidgetTester tester) async {
     await tester.pumpWidget(
@@ -71,12 +71,12 @@ testSmartSelect<T>({
 
     final s2State = tester.state<S2SingleState<T>>(s2Finder);
     expect(
-      s2State.selected.choice,
+      s2State.selected!.choice,
       initialChoice,
       reason: 'Initial choice is correct',
     );
     expect(
-      s2State.selected.value,
+      s2State.selected!.value,
       initialChoice?.value,
       reason: 'Initial value is correct',
     );
@@ -167,7 +167,7 @@ testSmartSelect<T>({
     await tester.pumpAndSettle();
 
     expect(
-      s2State.selected.choice,
+      s2State.selected!.choice,
       choiceToSelect,
       reason: 'New selected choice to internal choice is correct',
     );
@@ -178,12 +178,12 @@ testSmartSelect<T>({
     );
 
     expect(
-      s2State.selected.value,
+      s2State.selected!.value,
       choiceToSelect.value,
       reason: 'New selected value to internal value is correct',
     );
     expect(
-      selectedChoice.value,
+      selectedChoice!.value,
       choiceToSelect.value,
       reason: 'New selected value to external value is correct',
     );
@@ -194,8 +194,8 @@ class Bootstrap extends StatelessWidget {
   final Widget child;
 
   const Bootstrap({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
